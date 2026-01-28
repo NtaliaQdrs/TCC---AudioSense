@@ -1,0 +1,135 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* MENU SUPERIOR */
+.top-bar {
+    background-color: #1f4677;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    height: 70px; 
+}
+
+.logo img {
+   width: 80px;   
+    height: auto;
+    margin-left: 10px;
+    display: block;
+}
+
+.menu-links {
+    display: flex;
+    margin-left: 80px;
+    margin-top: -6px;
+    gap: 150px; /* aumenta bastante o espaço entre links */
+}
+
+.menu-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 21px;
+    border-radius: 30px;
+    padding: 6px 10px; /* área clicável maior */
+}
+
+.menu-links a:hover {
+    background-color: #4972a4;
+}
+
+.menu-right {
+    display: flex;
+    align-items: center;
+    gap: 30px; /* separa bem a busca do perfil */
+     margin-top: -6px;
+}
+
+.search-box {
+    position: relative;
+    width: 320px;
+    margin-right: 50px;
+}
+
+.search-box input {
+    padding: 10px 20px;
+    border-radius: 25px;
+    border: none;
+    outline: none;
+    width: 380px; /* barra de pesquisa mais longa */
+    font-size: 15px;
+    padding: 10px 16px 10px 42px; /* espaço pra lupa */
+}
+
+
+.search-box i {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #494848;
+    font-size: 16px;
+    pointer-events: none; /* não atrapalha o clique */
+}
+
+
+
+/* PERFIL */
+.perfil-btn {
+    background-color: #E9CCEF;
+    border: none;
+    border-radius: 30px;
+    padding: 8px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* texto esquerda / ícone direita */
+    cursor: pointer;
+    margin-right: 50px;
+    font-size: 15px;
+    width: 140px;
+}
+
+/* TEXTO */
+.perfil-btn a {
+    color: #000000;
+    font-size: 18px;
+    margin-left: 8px;
+    
+}
+
+/* ÍCONE */
+#perfil-logo {
+    background-color: #E9CCEF;
+    color: #000000;
+    border-radius: 50%;
+    font-size: 22px;
+ 
+}
+
+/* MENU SECUNDÁRIO */
+.sub-menu {
+    background-color: #E9CCEF;
+    padding: 22px 0;
+    display: flex;
+    justify-content: center;
+    gap: 45px; /* mais espaço entre os botões */
+}
+
+.sub-menu button {
+    background-color: #1f4677;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    width: 240px;           
+    height: 45px; 
+    padding: 14px 40px; 
+    font-size: 18px;
+    cursor: pointer;
+}
+
+
+.sub-menu button:hover {
+    opacity: 0.9;
+}

@@ -1,0 +1,152 @@
+body {
+    background-color: #1f4677;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    background-color: #E9CCEF;
+    padding: 40px;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 500px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.logo {
+    width: 80px;
+    margin-bottom: 20px;
+}
+
+.saudacao h1 {
+    color: #1f4677;
+    font-size: 24px;
+    margin-bottom: 30px;
+    line-height: 1.2;
+}
+
+.social-login {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.btn-social {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background: white;
+    cursor: pointer;
+    font-weight: 500;
+    color: #122e51;
+    text-decoration: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.divider {
+    margin: 20px 0;
+    font-size: 12px;
+    color: #122e51;
+    position: relative;
+}
+
+.input-group {
+    text-align: left;
+    margin-bottom: 15px;
+    background: white;
+    border-radius: 5px;
+    padding: 10px 15px;
+    border: 1px solid #ddd;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.input-content {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.input-content label {
+    font-size: 12px;
+        color: #122e51;
+
+    margin-bottom: 2px;
+}
+
+.input-content input {
+    border: none;
+    outline: none;
+    font-size: 14px;
+    width: 100%;
+    color: #1a3a6c;
+}
+
+.input-group i {
+    font-size: 18px;
+    color: #000000;
+}
+
+.bi-eye {
+    cursor: pointer;
+    color: #000000 !important;
+    font-size: 16px !important;
+}
+
+.options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+    margin-bottom: 25px;
+    color: #1a3a6c;
+}
+
+.options label {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+}
+
+.options a {
+    text-decoration: none;
+    color: #1a3a6c;
+}
+
+.btn-submit {
+    width: 100%;
+    padding: 15px;
+    background-color: #2eb086;
+    /* Verde do botão */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-bottom: 15px;
+}
+
+.footer-text {
+    font-size: 12px;
+    color: #1a3a6c;
+}
+
+.footer-text a {
+    font-weight: bold;
+    text-decoration: none;
+    color: #1a3a6c;
+}
+
+.footer-text a:hover {
+    text-decoration: underline;
+}

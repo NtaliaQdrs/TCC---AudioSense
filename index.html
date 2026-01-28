@@ -1,12 +1,59 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AudioSense</title>
+
+    <!-- Link para o arquivo CSS -->
+    <link rel="stylesheet" href="estilos/index.css">
+    <link rel="stylesheet" href="estilos/menu.css">
+    
+    <!-- Ícones do Bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+
+
 </head>
 
 <body>
+    <!-- MENU PRINCIPAL -->
+    <header class="top-bar">
+        <div class="logo">
+            <img src="logos/audiosense.png" alt="AudioSense">
+        </div>
+
+        <nav class="menu-links">
+            <a href="#">Início</a>
+            <a href="#">Configurações</a>
+            <a href="#">Sobre nós</a>
+        </nav>
+
+        <div class="menu-right">
+            <div class="search-box">
+                <i class="bi bi-search"></i>
+                <input type="text" placeholder="Pesquise...">
+                
+            </div>
+
+            <button class="perfil-btn">
+                <a> Perfil </a>
+                <span class="bi bi-person-circle" id="perfil-logo"> </span>
+            </button>
+        </div>
+    </header>
+
+    <!-- MENU SECUNDÁRIO -->
+    <section class="sub-menu">
+        <button>Deficiência visual</button>
+        <button>Audiodescrição</button>
+        <button>Entretenimento</button>
+        <button>Fórum</button>
+        <button>Biblioteca</button>
+    </section>
+
+
+    
 </body>
 
 </html>
