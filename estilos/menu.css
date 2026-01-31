@@ -11,11 +11,12 @@
     display: grid;
     grid-template-columns: auto 1fr auto;
     align-items: center;
-    height: 70px; 
+    height: 60px;
+    width: 100%; 
 }
 
 .logo img {
-   width: 80px;   
+   width: 70px;   
     height: auto;
     margin-left: 10px;
     display: block;
@@ -23,7 +24,7 @@
 
 .menu-links {
     display: flex;
-    margin-left: 80px;
+    margin-left: 120px;
     margin-top: -6px;
     gap: 150px; /* aumenta bastante o espaço entre links */
 }
@@ -31,7 +32,7 @@
 .menu-links a {
     color: white;
     text-decoration: none;
-    font-size: 21px;
+    font-size: 19px;
     border-radius: 30px;
     padding: 6px 10px; /* área clicável maior */
 }
@@ -122,10 +123,10 @@
     color: white;
     border: none;
     border-radius: 30px;
-    width: 240px;           
-    height: 45px; 
+    width: 220px;           
+    height: 43px; 
     padding: 14px 40px; 
-    font-size: 18px;
+    font-size: 17px;
     cursor: pointer;
 }
 
