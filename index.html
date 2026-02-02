@@ -24,7 +24,7 @@
         </div>
 
         <nav class="menu-links">
-            <a href="#">Início</a>
+            <a href="index.html">Início</a>
             <a href="#">Configurações</a>
             <a href="#">Sobre nós</a>
         </nav>
@@ -36,10 +36,41 @@
 
             </div>
 
-            <button class="perfil-btn">
-                <a> Perfil </a>
-                <span class="bi bi-person-circle" id="perfil-logo"> </span>
-            </button>
+
+            <!-- Perfil -->
+            <div class="profile-menu">
+                <button class="profile-button" id="profileBtn">
+                    <a> Perfil</a>
+                    <i class="bi bi-person-circle" id="perfil-logo"></i>
+                </button>
+
+                <!-- Menu dropdown -->
+                <div class="profile-dropdown" id="profileDropdown">
+                    <a href="profile-menu" class="dropdown-item">
+                        <i class="bi bi-person"></i> Meu Perfil <!-- Talvez mudar para aparecer a foto de perfil e o nome do usuario, e abaixo o email-->
+                    </a>
+                    <a href="#configuracoes" class="dropdown-item">
+                        <i class="bi bi-gear"></i> Configurações
+                    </a>
+
+                    <!-- Opção específica para DISCENTE -->
+                    <a href="#minhas-audiodescrições" class="dropdown-item" id="minhasAudiodescrições"
+                        style="display: none;">
+                        <i class="bi bi-headphones"></i> Minhas Audiodescrições
+                    </a>
+
+                    <!-- Opção específica para DOCENTE -->
+                    <a href="#meus-materiais" class="dropdown-item" id="meusMateriais" style="display: none;">
+                        <i class="bi bi-file-earmark"></i> Meus Materiais
+                    </a>
+
+                    <hr class="dropdown-divider">
+                    <a href="#sair" class="dropdown-item logout" id="logoutBtn">
+                        <i class="bi bi-box-arrow-right"></i> Sair
+                    </a>
+                </div>
+            </div>
+
         </div>
     </header>
 
@@ -56,19 +87,59 @@
     <section class="welcome-section">
         <div class="welcome-container">
             <div class="welcome-content">
-                <h1 class="welcome-title">Bem Vindo(a) ao AudioSense!</h1>
+                <h1 class="welcome-title">Boas vindas ao AudioSense!</h1>
                 <p class="welcome-description">
                     O AudioSense é um espaço que promove o aprendizado de audiodescricão e
                     acessibilidade, contando com um espaço colaborativo, onde você poderá interagir
                     com outros usuários.
                 </p>
-                <a href="pages/login-discente.html" class="welcome-button">Entre ou Cadastre-se</a>
+                <a href="pages/login.html" class="welcome-button">Entre ou Cadastre-se</a>
             </div>
             <div class="welcome-icon">
                 <img src="logos/boasvindas.png" alt="Welcome Icon">
             </div>
         </div>
     </section>
+
+
+    <!-- Seção de Estatísticas -->
+    <section class="stats-section">
+        <div class="stats-container">
+            <!-- Usuários da plataforma -->
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="bi bi-people-fill"></i>
+                </div>
+                <h3 class="stat-title">Usuários da plataforma</h3>
+                <p class="stat-value">
+                    <span id="total-discentes">0</span>+ Discentes
+
+                    <span id="total-docentes">0</span>+ Docentes
+                </p>
+            </div>
+
+            <!-- Conteúdo audiovisual -->
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="bi bi-images"></i>
+                </div>
+                <h3 class="stat-title">Conteúdo audiovisual</h3>
+                <p class="stat-value"><span id="total-audiovisual">0</span>+ Obras recomendadas</p>
+            </div>
+
+            <!-- Materiais educacionais -->
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="bi bi-journal-richtext"></i>
+                </div>
+                <h3 class="stat-title">Materiais educacionais</h3>
+                <p class="stat-value"><span id="total-materiais">0</span>+ Materiais disponíveis</p>
+            </div>
+        </div>
+    </section>
+
+
+    <script src="scripts/index.js" defer></script>
 
 </body>
 

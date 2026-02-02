@@ -18,11 +18,11 @@ router.get('/profile', authMiddleware, userController.getProfile);
 router.put('/profile', authMiddleware, userController.updateProfile);
 router.delete('/profile', authMiddleware, userController.deleteProfile);
 
-// Rotas de docente (precisa ser docente APROVADO)
+// Rotas de docente (precisa ser docente APROVADO), coisas a adicionar
 router.get('/meus-materiais', authMiddleware, docenteMiddleware, userController.meusMateriais);
 router.post('/criar-material', authMiddleware, docenteMiddleware, userController.criarMaterial);
 
-// Rotas de admin (precisa ser administrador)
+// Rotas de admin (precisa ser administrador), coisas a adicionar
 router.put('/aprovar-docente/:id', authMiddleware, adminMiddleware, userController.aprovarDocente);
 router.get('/docentes-pendentes', authMiddleware, adminMiddleware, userController.docentesPendentes);
 

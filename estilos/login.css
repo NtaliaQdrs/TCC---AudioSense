@@ -80,7 +80,7 @@ body {
 }
 
 .input-content label {
-    font-size: 12px;
+    font-size: 16px;
     color: #122e51;
     margin-bottom: 2px;
 }
@@ -88,7 +88,7 @@ body {
 .input-content input {
     border: none;
     outline: none;
-    font-size: 14px;
+    font-size: 16px;
     width: 100%;
     color: #1a3a6c;
 }
@@ -108,7 +108,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: 12px;
+    font-size: 16px;
     margin-bottom: 25px;
     color: #1a3a6c;
 }
@@ -123,6 +123,7 @@ body {
 .options a {
     text-decoration: none;
     color: #1a3a6c;
+    
 }
 
 .options a:hover {
@@ -147,7 +148,7 @@ body {
 }
 
 .footer-text {
-    font-size: 12px;
+    font-size: 16px;
     color: #1a3a6c;
 }
 
