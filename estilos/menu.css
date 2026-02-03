@@ -11,7 +11,7 @@
     display: grid;
     grid-template-columns: auto 1fr auto;
     align-items: center;
-    height: 60px;
+    height: 55px;
     width: 100%; 
     position: fixed;
     top: 0;
@@ -21,17 +21,20 @@
 }
 
 .logo img {
-    width: 70px;   
+    width: 59px;  
     height: auto;
-    margin-left: 8px;
+    margin-left: 0px;
     display: block;
+    transform: scale(1.5); /* Aumenta em 50% o tamanho */
+    transform-origin: left center; /* Garante que ela cresça a partir da esquerda */
+    
 }
 
 .menu-links {
     display: flex;
-    margin-left: 120px;
-    margin-top: -6px;
-    gap: 150px; /* aumenta bastante o espaço entre links */
+    margin-left: 135px;
+    margin-top: -10px;
+    gap: 160px; /* aumenta bastante o espaço entre links */
 }
 
 .menu-links a {
@@ -40,6 +43,11 @@
     font-size: 19px;
     border-radius: 30px;
     padding: 6px 10px; /* área clicável maior */
+}
+
+.menu-links a:last-child { /* coloca o 'sobre nós' um pouco mais pra direita */
+    position: relative;
+    left: -20px; 
 }
 
 .menu-links a:hover {
@@ -72,7 +80,7 @@
 
 .search-box i {
     position: absolute;
-    left: 16px;
+    left: 17px;
     top: 50%;
     transform: translateY(-50%);
     color: #494848;
@@ -102,6 +110,7 @@
     margin-right: 50px;
     font-size: 16px;
     width: 140px;
+    height: 40px;
 }
 
 #profileBtn:hover {
@@ -164,11 +173,13 @@
     width: 100%;
     text-align: left;
     font-size: 18px;
+    font-weight: 540;
 }
 
 .dropdown-item:hover {
     background-color: #f0f0f0;
     color: #1f4677;
+    
 
 }
 
@@ -196,7 +207,7 @@
     display: flex;
     justify-content: center;
     gap: 45px; /* mais espaço entre os botões */
-    margin-top: 65px;
+    margin-top: 50px;
 }
 
 .sub-menu button {

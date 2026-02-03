@@ -276,6 +276,9 @@ const userController = {
         }
     },
 
+
+
+
     // Aprovar docente (apenas admin)
 
     aprovarDocente: async (req, res) => {
@@ -340,7 +343,68 @@ const userController = {
             console.error('Erro ao listar docentes pendentes:', error);
             res.status(500).json({ error: 'Erro interno no servidor.' });
         }
+    },
+
+    // Obter status do usuário (admin, aprovação, etc)
+    getStatusAdmin: async (req, res) => {
+        try {
+            const { userId } = req;
+
+            // Buscar informações do usuário
+            const [users] = await pool.query(
+                'SELECT id, tipo_usuario FROM usuario WHERE id = ?',
+                [userId]
+            );
+
+            if (users.length === 0) {
+                return res.status(404).json({ error: 'Usuário não encontrado.' });
+            }
+
+            const user = users[0];
+            const tipoUsuario = user.tipo_usuario;
+
+            // Se for discente
+            if (tipoUsuario === 'discente') {
+                return res.status(200).json({
+                    isAdmin: false,
+                    statusAprovacao: 'aprovado',
+                    tipo: 'discente'
+                });
+            }
+
+            // Se for docente
+            if (tipoUsuario === 'docente') {
+                const [docentes] = await pool.query(
+                    'SELECT is_admin, status_aprovacao FROM usuario_docente WHERE usuario_id = ?',
+                    [userId]
+                );
+
+                if (docentes.length === 0) {
+                    return res.status(404).json({ error: 'Dados de docente não encontrados.' });
+                }
+
+                const docente = docentes[0];
+                const isAdmin = docente.is_admin === 1 || docente.is_admin === true;
+
+                return res.status(200).json({
+                    isAdmin: isAdmin,
+                    statusAprovacao: docente.status_aprovacao,
+                    tipo: 'docente'
+                });
+            }
+
+            res.status(200).json({
+                isAdmin: false,
+                statusAprovacao: 'desconhecido',
+                tipo: tipoUsuario
+            });
+
+        } catch (error) {
+            console.error('Erro ao obter status de admin:', error);
+            res.status(500).json({ error: 'Erro interno no servidor.' });
+        }
     }
+
 
 };
 

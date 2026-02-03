@@ -4,6 +4,8 @@ const profileDropdown = document.getElementById('profileDropdown');
 const logoutBtn = document.getElementById('logoutBtn');
 const minhasAudiodescrições = document.getElementById('minhasAudiodescrições');
 const meusMateriais = document.getElementById('meusMateriais');
+const adminPanel = document.getElementById('adminPainel');
+
 
 // Abrir/Fechar menu
 profileBtn.addEventListener('click', () => {
@@ -28,7 +30,7 @@ logoutBtn.addEventListener('click', (e) => {
 // Mostrar opções específicas conforme o tipo de usuário
 function verificarTipoUsuario() {
     const tipoUsuario = localStorage.getItem('tipoUsuario');
-    
+
     if (tipoUsuario === 'docente') {
         // Docente vê "Meus Materiais"
         meusMateriais.style.display = 'flex';
@@ -40,5 +42,20 @@ function verificarTipoUsuario() {
     }
 }
 
+// Controle de exibição de administração
+function verificarPermissoes() {
+    const tipoUsuario = localStorage.getItem('tipoUsuario');
+
+    // Apenas docentes veem o painel
+    if (tipoUsuario === 'docente') {
+        adminPanel.style.display = 'flex';
+    } else {
+        adminPanel.style.display = 'none';
+    }
+}
+
 // Executar ao carregar a página
-document.addEventListener('DOMContentLoaded', verificarTipoUsuario);
+document.addEventListener('DOMContentLoaded', () => {
+    verificarTipoUsuario();
+    verificarPermissoes();
+});

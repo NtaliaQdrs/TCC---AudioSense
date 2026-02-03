@@ -17,6 +17,7 @@ router.post('/login', userController.login);
 router.get('/profile', authMiddleware, userController.getProfile);
 router.put('/profile', authMiddleware, userController.updateProfile);
 router.delete('/profile', authMiddleware, userController.deleteProfile);
+router.get('/status-admin', authMiddleware, userController.getStatusAdmin); 
 
 // Rotas de docente (precisa ser docente APROVADO), coisas a adicionar
 router.get('/meus-materiais', authMiddleware, docenteMiddleware, userController.meusMateriais);
