@@ -11,21 +11,21 @@ body {
     padding: 40px;
     border-radius: 10px;
     width: 100%;
-    max-width: 500px;
+    max-width: 550px;
     text-align: center;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
 .logo {
     width: 80px;
-    margin-bottom: 20px;
+
 }
 
 .saudacao h1 {
     color: #1f4677;
-    font-size: 24px;
-    margin-bottom: 30px;
-    line-height: 1.2;
+    font-size: 27px;
+    margin-bottom: 40px;
+    font-weight: 1000;
 }
 
 .social-login {
@@ -33,7 +33,7 @@ body {
     flex-direction: column;
     gap: 15px;
     margin-bottom: 20px;
-    
+
 }
 
 .btn-social {
@@ -54,7 +54,7 @@ body {
 
 .divider {
     margin: 20px 0;
-    font-size: 12px;
+    font-size: 16px;
     color: #122e51;
     position: relative;
 }
@@ -76,13 +76,14 @@ body {
     display: flex;
     flex-direction: column;
     flex-grow: 1;
-    
+
 }
 
 .input-content label {
     font-size: 16px;
     color: #122e51;
     margin-bottom: 2px;
+    font-weight: 550;
 }
 
 .input-content input {
@@ -98,11 +99,82 @@ body {
     color: #000000;
 }
 
-.bi-eye {
+/* Estilo para o select */
+.input-content select {
+    border: none;
+    outline: none;
+    font-size: 16px;
+    width: 100%;
+    color: #1a3a6c;
+    background-color: white;
     cursor: pointer;
-    color: #000000 !important;
-    font-size: 16px !important;
+    padding: 5px 0;
+    appearance: none;
+    /* Remove o estilo padrão do navegador */
 }
+
+/* Estilo para o input "Outra" */
+.input-content input[type="text"] {
+    border: none;
+    outline: none;
+    font-size: 16px;
+    width: 100%;
+    color: #1a3a6c;
+    border-radius: 3px;
+}
+
+.input-content input[type="text"]::placeholder {
+    color: #999;
+}
+
+.input-content input[type="text"]:focus {
+    background-color: white;
+}
+
+/* Estilo do select com ícone de seta customizado */
+.input-content {
+    position: relative;
+}
+
+.input-content select {
+    padding-right: 25px;
+}
+
+/* Adiciona uma seta customizada ao select */
+.input-group:has(select) .input-content::after {
+    content: '❯';
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%) rotate(90deg);
+    pointer-events: none;
+    color: #1a3a6c;
+    font-size: 16px;
+}
+
+
+
+/* Ícone de olho para toggle password */
+.toggle-password {
+    cursor: pointer;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #000000;
+    font-size: 16px;
+    user-select: none;
+}
+
+.toggle-password:hover {
+    color: #1a3a6c;
+}
+
+/* Fazer o input-content ser relativo para o ícone ficar posicionado */
+.input-content {
+    position: relative;
+}
+
 
 .options {
     display: flex;
@@ -123,7 +195,7 @@ body {
 .options a {
     text-decoration: none;
     color: #1a3a6c;
-    
+
 }
 
 .options a:hover {

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>cadastro_audiosense</title>
+
+    <link rel="stylesheet" href="../estilos/login.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="saudacao">
+            <!-- Logo da AudioSense -->
+            <img src="../logos/audiosense-login.png" alt="AudioSense Logo" class="logo">
+            <h1>Bem vindo(a) ao AudioSense!</h1>
+        </div>
+
+        <div class="cad">
+            <form>
+                <div class="input-group">
+                    <i class="bi bi-envelope-fill"></i>
+                    <div class="input-content">
+                        <label>Nome completo</label>
+                        <input type="text" placeholder="Nome completo aqui" required>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <i class="bi bi-envelope-fill"></i>
+                    <div class="input-content">
+                        <label>Email institucional</label>
+                        <input type="email" placeholder="Exemplo@gmail.com" required>
+                    </div>
+                </div>
+
+            
+                <!-- Crie uma senha -->
+                <div class="input-group">
+                    <i class="bi bi-key-fill"></i>
+                    <div class="input-content">
+                        <label>Crie uma senha</label>
+                        <input type="password" id="senha" placeholder="••••••••••">
+                        <i class="bi bi-eye toggle-password" onclick="togglePassword('senha')"></i>
+                    </div>
+                </div>
+
+                <!-- Confirme a senha -->
+                <div class="input-group">
+                    <i class="bi bi-key-fill"></i>
+                    <div class="input-content">
+                        <label>Confirme a senha</label>
+                        <input type="password" id="confirmSenha" placeholder="••••••••••" >
+                        <i class="bi bi-eye toggle-password" onclick="togglePassword('confirmSenha')"></i>
+                        
+                    </div>
+                </div>
+
+
+                <div class="input-group">
+                    <i class="bi bi-book-half"></i>
+                    <div class="input-content">
+                        <label>Disciplina(s) lecionada(s)</label>
+                        <select id="disciplina" name="disciplina">
+                            <option value="">Selecione uma disciplina</option> <!-- A adicionar    -->
+                            <option value="outra">Outra (digite abaixo)</option>
+                        </select>
+
+                        <!-- Input que aparece só quando seleciona "Outra" -->
+                        <input type="text" id="disciplinaOutra" name="disciplinaOutra" placeholder="Digite a disciplina"
+                            style="display: none; margin-top: 10px;">
+
+
+
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <i class="bi bi-journal-text"></i>
+                    <div class="input-content">
+                        <label>Comprovante de vínculo</label>
+                        <input type="file">
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <div class="input-content">
+                        <label>Informações adicionais</label>
+                        <input type="text" placeholder="Alguma informação extra ou link...">
+                    </div>
+                </div>
+
+        </div>
+
+        <div class="options">
+            <label>
+                <input type="checkbox" style="accent-color: #2eb086;"> Me lembre
+            </label>
+        </div>
+
+        <button type="submit" class="btn-submit">Cadastre-se</button>
+        <p class="footer-text">Já possui uma conta? <a href="login.html">Faça login</a></p>
+        </form>
+
+    </div>
+    <script src="../scripts/cadastroDocente.js"> </script>
+
+</body>
+
+</html>

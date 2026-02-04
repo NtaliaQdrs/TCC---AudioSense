@@ -54,6 +54,18 @@ function verificarPermissoes() {
     }
 }
 
+
+
+select.addEventListener('change', (e) => {
+    if (e.target.value === 'outra') {
+        input.style.display = 'block';
+        input.focus();
+    } else {
+        input.style.display = 'none';
+        input.value = '';
+    }
+});
+
 // Executar ao carregar a página
 document.addEventListener('DOMContentLoaded', () => {
     verificarTipoUsuario();
