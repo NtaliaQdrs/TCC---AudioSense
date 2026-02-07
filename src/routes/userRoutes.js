@@ -23,8 +23,4 @@ router.get('/status-admin', authMiddleware, userController.getStatusAdmin);
 router.get('/meus-materiais', authMiddleware, docenteMiddleware, userController.meusMateriais);
 router.post('/criar-material', authMiddleware, docenteMiddleware, userController.criarMaterial);
 
-// Rotas de admin (precisa ser administrador), coisas a adicionar
-router.put('/aprovar-docente/:id', authMiddleware, adminMiddleware, userController.aprovarDocente);
-router.get('/docentes-pendentes', authMiddleware, adminMiddleware, userController.docentesPendentes);
-
 export default router;

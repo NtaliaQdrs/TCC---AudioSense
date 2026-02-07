@@ -1,4 +1,4 @@
-// Importa o pool de conexões do banco
+// Importa o pool de conexões do banco, provavelmente vai precisar ser feito um middlewere para docente também, para verificar se é docente aprovado ou não, e liberar acesso a certas rotas, como criar material, ver materiais, etc. E o admin pode aprovar ou negar docentes, e ver os docentes pendentes de aprovação. O admin também pode acessar um painel de controle para gerenciar o sistema, como ver estatísticas, gerenciar usuários, etc. O painel de controle do admin pode ser uma página separada no frontend, que só é acessível para admins. O middleware de admin vai verificar se o usuário é um admin antes de permitir o acesso a essas rotas ou páginas.
 import pool from '../config/db.js';
 
 // Cria o middleware para verificar se é admin

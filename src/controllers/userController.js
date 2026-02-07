@@ -3,6 +3,35 @@ import pool from '../config/db.js';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
+// FUNÇÃO DE VALIDAÇÃO DE SENHA
+// ============================================
+function validarSenha(senha) {
+    const minLength = 8;
+    const hasUpperCase = /[A-Z]/.test(senha);
+    const hasLowerCase = /[a-z]/.test(senha);
+    const hasNumber = /[0-9]/.test(senha);
+    const hasSpecialChar = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(senha);
+
+    if (senha.length < minLength) {
+        return { valida: false, erro: `A senha deve ter no mínimo ${minLength} caracteres.` };
+    }
+    if (!hasUpperCase) {
+        return { valida: false, erro: 'A senha deve conter pelo menos uma letra maiúscula.' };
+    }
+    if (!hasLowerCase) {
+        return { valida: false, erro: 'A senha deve conter pelo menos uma letra minúscula.' };
+    }
+    if (!hasNumber) {
+        return { valida: false, erro: 'A senha deve conter pelo menos um número.' };
+    }
+    if (!hasSpecialChar) {
+        return { valida: false, erro: 'A senha deve conter pelo menos um caractere especial (!@#$%^&*).' };
+    }
+
+    return { valida: true };
+}
+
+
 const userController = {
 
     // Cadastro de Discente
@@ -14,6 +43,14 @@ const userController = {
             if (!nome_completo || !email || !senha) {
                 return res.status(400).json({ error: 'Nome, email e senha são obrigatórios.' });
             }
+
+
+            // Validar força da senha
+            const validacao = validarSenha(senha);
+            if (!validacao.valida) {
+                return res.status(400).json({ error: validacao.erro });
+            }
+
 
             // Verificar se o email já existe
             const [existingUser] = await pool.query(
@@ -62,6 +99,14 @@ const userController = {
             if (!nome_completo || !email || !senha || !disciplina_id) {
                 return res.status(400).json({ error: 'Nome, email, senha e disciplina são obrigatórios.' });
             }
+
+
+            // Validar força da senha
+            const validacao = validarSenha(senha);
+            if (!validacao.valida) {
+                return res.status(400).json({ error: validacao.erro });
+            }
+
 
             // Verificar se o email já existe
             const [existingUser] = await pool.query(
@@ -112,6 +157,13 @@ const userController = {
         try {
             const { email, senha } = req.body;
 
+            // VERIFICA SE O JWT_SECRET EXISTE
+            if (!process.env.JWT_SECRET) {
+                return res.status(500).json({
+                    error: 'JWT_SECRET não configurado no servidor.'
+                });
+            }
+
             // Validação básica
             if (!email || !senha) {
                 return res.status(400).json({ error: 'Email e senha são obrigatórios.' });
@@ -128,6 +180,20 @@ const userController = {
             }
 
             const user = users[0];
+
+            // Bloquear docente não aprovado
+            if (user.tipo_usuario === 'docente') {
+                const [docente] = await pool.query(
+                    'SELECT status_aprovacao FROM usuario_docente WHERE usuario_id = ?',
+                    [user.id]
+                );
+
+                if (docente.length === 0 || docente[0].status_aprovacao !== 'aprovado') {
+                    return res.status(403).json({
+                        error: 'Cadastro de docente ainda não aprovado.'
+                    });
+                }
+            }
 
             // Comparar a senha
             const isPasswordCorrect = await bcrypt.compare(senha, user.senha);
@@ -266,6 +332,9 @@ const userController = {
                 return res.status(401).json({ error: 'Senha incorreta. A exclusão foi cancelada.' });
             }
 
+            await pool.query('DELETE FROM docente_disciplina WHERE docente_id = ?', [userId]);
+            await pool.query('DELETE FROM usuario_docente WHERE usuario_id = ?', [userId]);
+            await pool.query('DELETE FROM usuario_discente WHERE usuario_id = ?', [userId]);
             await pool.query('DELETE FROM usuario WHERE id = ?', [userId]);
 
             res.status(200).json({ message: 'Conta deletada com sucesso.' });
@@ -284,7 +353,7 @@ const userController = {
     aprovarDocente: async (req, res) => {
         try {
             const { id } = req.params;
-            const { status } = req.body; // 'aprovado' ou 'rejeitado'
+            const { status, motivo_rejeicao } = req.body; // 'aprovado' ou 'rejeitado'
 
             if (!status || !['aprovado', 'rejeitado'].includes(status)) {
                 return res.status(400).json({ error: 'Status deve ser "aprovado" ou "rejeitado".' });
@@ -310,8 +379,8 @@ const userController = {
             } else {
                 // Se recusado, salva o motivo também
                 await pool.query(
-                    'UPDATE usuario_docente SET status_docente = ?, motivo_recusa = ? WHERE usuario_id = ?',
-                    ['recusado', motivo_recusa, id]
+                    'UPDATE usuario_docente SET status_docente = ?, motivo_rejeicao = ? WHERE usuario_id = ?',
+                    ['recusado', motivo_rejeicao, id]
                 );
             }
 
@@ -403,9 +472,11 @@ const userController = {
             console.error('Erro ao obter status de admin:', error);
             res.status(500).json({ error: 'Erro interno no servidor.' });
         }
-    }
-
+    },
 
 };
 
+
 export default userController;
+
+

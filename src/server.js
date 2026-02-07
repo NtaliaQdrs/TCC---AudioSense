@@ -4,6 +4,9 @@ import 'dotenv/config';
 import cors from 'cors';
 import './config/db.js';
 import userRoutes from './routes/userRoutes.js';
+import estatisticaRoutes from './routes/estatisticaRoutes.js'; 
+import adminRoutes from './routes/adminRoutes.js';
+
 
 // 3. Configuração do App
 const app = express();
@@ -23,6 +26,9 @@ app.use(express.json());
 
 // 6. rotas
  app.use('/api/users', userRoutes);
+ app.use('/api/estatisticas', estatisticaRoutes);
+ app.use('/api/admin', adminRoutes);  
+
 
 // 7. Definição da Porta
 const PORT = process.env.PORT || 3000;

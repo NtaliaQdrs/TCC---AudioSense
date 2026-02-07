@@ -66,6 +66,46 @@ select.addEventListener('change', (e) => {
     }
 });
 
+
+
+// Função para buscar estatísticas do backend
+async function carregarEstatisticas() {
+    try {
+        // Buscar número de discentes
+        const responseDiscentes = await fetch('http://localhost:3000/api/users/contar-discentes');
+        if (responseDiscentes.ok) {
+            const dataDiscentes = await responseDiscentes.json();
+            document.getElementById('total-discentes').textContent = dataDiscentes.total || 0;
+        }
+
+        // Buscar número de docentes
+        const responseDocentes = await fetch('http://localhost:3000/api/users/contar-docentes');
+        if (responseDocentes.ok) {
+            const dataDocentes = await responseDocentes.json();
+            document.getElementById('total-docentes').textContent = dataDocentes.total || 0;
+        }
+
+        // Se tiver outras rotas, descomente:
+        // const responseAudiovisual = await fetch('http://localhost:3000/api/conteudo/contar');
+        // if (responseAudiovisual.ok) {
+        //     const dataAudiovisual = await responseAudiovisual.json();
+        //     document.getElementById('total-audiovisual').textContent = dataAudiovisual.total || 0;
+        // }
+
+        // const responseMateriais = await fetch('http://localhost:3000/api/material-didatico/contar');
+        // if (responseMateriais.ok) {
+        //     const dataMateriais = await responseMateriais.json();
+        //     document.getElementById('total-materiais').textContent = dataMateriais.total || 0;
+        // }
+
+    } catch (error) {
+        console.error('Erro ao carregar estatísticas:', error);
+    }
+}
+
+// Carregar estatísticas quando a página carrega
+document.addEventListener('DOMContentLoaded', carregarEstatisticas);
+
 // Executar ao carregar a página
 document.addEventListener('DOMContentLoaded', () => {
     verificarTipoUsuario();

@@ -46,13 +46,15 @@
             </div>
 
             <div class="input-group">
-                <i class="bi bi-key-fill"></i>
-                <div class="input-content">
-                    <label>Senha</label>
-                    <input type="password" placeholder="**********" required>
+                    <i class="bi bi-key-fill"></i>
+                    <div class="input-content">
+                        <label>Senha</label>
+                        <input type="password" id="senha" placeholder="••••••••••" >
+                        <i class="bi bi-eye toggle-password" onclick="togglePassword('senha')"></i>
+                        
+                    </div>
                 </div>
-                <i class="bi bi-eye"></i>
-            </div>
+
 
             <div class="options">
                 <label>
@@ -64,10 +66,10 @@
             <button type="submit" class="btn-submit">Entrar</button>
         </form>
 
-        <p class="footer-text">Não possui uma conta? <a href="cadastroDocente.html">Cadastre-se</a></p>
+        <p class="footer-text">Não possui uma conta? <a href="cadastro.html">Cadastre-se</a></p>
     </div>
 
-
+    <script src="../scripts/cadastroDocente.js"> </script>
 </body>
 
 </html>
