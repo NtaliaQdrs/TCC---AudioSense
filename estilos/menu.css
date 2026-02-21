@@ -32,7 +32,7 @@
 
 .menu-links {
     display: flex;
-    margin-left: 135px;
+    margin-left: 120px;
     margin-top: -10px;
     gap: 160px; /* aumenta bastante o espaço entre links */
 }
@@ -68,6 +68,7 @@
 }
 
 .search-box input {
+    background-color: white;
     padding: 10px 20px;
     border-radius: 25px;
     border: none;

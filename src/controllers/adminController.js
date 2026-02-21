@@ -84,6 +84,25 @@ const adminController = {
         }
     },
 
+    // Listar docentes pendentes (apenas admin)
+    docentesPendentes: async (req, res) => {
+        try {
+            const [docentes] = await pool.query(`
+        SELECT u.id, u.nome_completo, u.email, ud.status_aprovacao, ud.comprovante_vinculo
+        FROM usuario u
+        JOIN usuario_docente ud ON u.id = ud.usuario_id
+        WHERE ud.status_aprovacao = 'pendente'
+      `);
+
+            res.status(200).json(docentes);
+
+        } catch (error) {
+            console.error('Erro ao listar docentes pendentes:', error);
+            res.status(500).json({ error: 'Erro interno no servidor.' });
+        }
+    },
+
+
     // ============================================
     // APROVAÇÃO DE SOLICITAÇÕES DE ADMINISTRADOR
     // ============================================
@@ -269,7 +288,7 @@ const adminController = {
         }
     },
 
-   
+
 };
 
 export default adminController;

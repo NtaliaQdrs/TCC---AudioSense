@@ -1,3 +1,5 @@
+console.log("🔥 USER CONTROLLER CARREGADO");
+
 // Importa o pool de conexões, bcrypt para criptografar senha e jwt para tokens
 import pool from '../config/db.js';
 import bcrypt from 'bcryptjs';
@@ -154,55 +156,53 @@ const userController = {
 
     // Login
     login: async (req, res) => {
+        console.log("JWT_SECRET dentro do controller:", process.env.JWT_SECRET);
         try {
+            
             const { email, senha } = req.body;
 
-            // VERIFICA SE O JWT_SECRET EXISTE
+            console.log("📩 Email recebido:", email);
+            console.log("🔐 Senha recebida:", senha);
+
             if (!process.env.JWT_SECRET) {
+                console.log("❌ JWT_SECRET não encontrado!");
                 return res.status(500).json({
                     error: 'JWT_SECRET não configurado no servidor.'
                 });
             }
 
-            // Validação básica
             if (!email || !senha) {
+                console.log("❌ Email ou senha vazios");
                 return res.status(400).json({ error: 'Email e senha são obrigatórios.' });
             }
 
-            // Buscar o usuário pelo email
             const [users] = await pool.query(
                 'SELECT * FROM usuario WHERE email = ?',
                 [email]
             );
 
+            console.log("👤 Resultado da consulta no banco:", users);
+
             if (users.length === 0) {
+                console.log("❌ Usuário não encontrado no banco");
                 return res.status(401).json({ error: 'Credenciais inválidas.' });
             }
 
             const user = users[0];
 
-            // Bloquear docente não aprovado
-            if (user.tipo_usuario === 'docente') {
-                const [docente] = await pool.query(
-                    'SELECT status_aprovacao FROM usuario_docente WHERE usuario_id = ?',
-                    [user.id]
-                );
+            console.log("🔒 Hash armazenado no banco:", user.senha);
 
-                if (docente.length === 0 || docente[0].status_aprovacao !== 'aprovado') {
-                    return res.status(403).json({
-                        error: 'Cadastro de docente ainda não aprovado.'
-                    });
-                }
-            }
-
-            // Comparar a senha
             const isPasswordCorrect = await bcrypt.compare(senha, user.senha);
 
+            console.log("🧪 Resultado do bcrypt.compare:", isPasswordCorrect);
+
             if (!isPasswordCorrect) {
+                console.log("❌ Senha incorreta");
                 return res.status(401).json({ error: 'Credenciais inválidas.' });
             }
 
-            // Gerar token JWT
+            console.log("✅ Senha correta!");
+
             const token = jwt.sign(
                 { userId: user.id, email: user.email, tipo_usuario: user.tipo_usuario },
                 process.env.JWT_SECRET,
@@ -220,6 +220,7 @@ const userController = {
             res.status(500).json({ error: 'Erro interno no servidor.' });
         }
     },
+
 
     // Pegar perfil do usuário
     getProfile: async (req, res) => {
@@ -348,72 +349,7 @@ const userController = {
 
 
 
-    // Aprovar docente (apenas admin)
-
-    aprovarDocente: async (req, res) => {
-        try {
-            const { id } = req.params;
-            const { status, motivo_rejeicao } = req.body; // 'aprovado' ou 'rejeitado'
-
-            if (!status || !['aprovado', 'rejeitado'].includes(status)) {
-                return res.status(400).json({ error: 'Status deve ser "aprovado" ou "rejeitado".' });
-            }
-
-            // Se for rejeição, motivo é obrigatório
-            if (status === 'rejeitado' && !motivo_rejeicao) {
-                return res.status(400).json({ error: 'Motivo da rejeição é obrigatório.' });
-            }
-
-            // Atualizar status_aprovacao
-            await pool.query(
-                'UPDATE usuario_docente SET status_aprovacao = ?, motivo_rejeicao = ? WHERE usuario_id = ?',
-                [status, motivo_rejeicao || null, id]
-            );
-
-            // Atualizar apenas o status (NÃO DELETA O REGISTRO)
-            if (status === 'aprovado') {
-                await pool.query(
-                    'UPDATE usuario_docente SET status_docente = ? WHERE usuario_id = ?',
-                    ['aprovado', id]
-                );
-            } else {
-                // Se recusado, salva o motivo também
-                await pool.query(
-                    'UPDATE usuario_docente SET status_docente = ?, motivo_rejeicao = ? WHERE usuario_id = ?',
-                    ['recusado', motivo_rejeicao, id]
-                );
-            }
-
-
-            res.status(200).json({
-                message: `Docente ${status} com sucesso!`,
-                motivo: motivo_rejeicao || null
-            });
-
-        } catch (error) {
-            console.error('Erro ao aprovar docente:', error);
-            res.status(500).json({ error: 'Erro interno no servidor.' });
-        }
-    },
-
-    // Listar docentes pendentes (apenas admin)
-    docentesPendentes: async (req, res) => {
-        try {
-            const [docentes] = await pool.query(`
-        SELECT u.id, u.nome_completo, u.email, ud.status_aprovacao, ud.comprovante_vinculo
-        FROM usuario u
-        JOIN usuario_docente ud ON u.id = ud.usuario_id
-        WHERE ud.status_aprovacao = 'pendente'
-      `);
-
-            res.status(200).json(docentes);
-
-        } catch (error) {
-            console.error('Erro ao listar docentes pendentes:', error);
-            res.status(500).json({ error: 'Erro interno no servidor.' });
-        }
-    },
-
+    
     // Obter status do usuário (admin, aprovação, etc)
     getStatusAdmin: async (req, res) => {
         try {

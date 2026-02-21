@@ -1,6 +1,7 @@
 // 1. Importações das bibliotecas
-import express from 'express';
 import 'dotenv/config';
+import express from 'express';
+console.log("JWT_SECRET:", process.env.JWT_SECRET);
 import cors from 'cors';
 import './config/db.js';
 import userRoutes from './routes/userRoutes.js';

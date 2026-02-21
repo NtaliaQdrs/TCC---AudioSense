@@ -2,8 +2,7 @@
 import { Router } from 'express';
 import userController from '../controllers/userController.js';
 import authMiddleware from '../middlewares/authMiddleware.js';
-import adminMiddleware from '../middlewares/adminMiddleware.js';
-import docenteMiddleware from '../middlewares/docenteMiddleware.js';
+
 
 // Cria o objeto router com a configuração padrão do express
 const router = new Router();
@@ -17,10 +16,6 @@ router.post('/login', userController.login);
 router.get('/profile', authMiddleware, userController.getProfile);
 router.put('/profile', authMiddleware, userController.updateProfile);
 router.delete('/profile', authMiddleware, userController.deleteProfile);
-router.get('/status-admin', authMiddleware, userController.getStatusAdmin); 
 
-// Rotas de docente (precisa ser docente APROVADO), coisas a adicionar
-router.get('/meus-materiais', authMiddleware, docenteMiddleware, userController.meusMateriais);
-router.post('/criar-material', authMiddleware, docenteMiddleware, userController.criarMaterial);
 
 export default router;
