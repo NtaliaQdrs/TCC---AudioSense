@@ -1,5 +1,6 @@
 // 1. Importações das bibliotecas
-import 'dotenv/config';
+import dotenv from 'dotenv';
+dotenv.config();
 import express from 'express';
 console.log("JWT_SECRET:", process.env.JWT_SECRET);
 import cors from 'cors';

@@ -1,5 +1,6 @@
 import mysql from 'mysql2/promise'; 
-import 'dotenv/config';
+import dotenv from 'dotenv';
+dotenv.config();
 
 console.log('Criando pool de conexões...');
 
