@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>paineladmin_audiosense</title>
+
+    <link rel="stylesheet" href="../estilos/login.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="saudacao">
+            <!-- Logo da AudioSense -->
+            <img src="../logos/audiosense-login.png" alt="AudioSense Logo" class="logo">
+            <h1>Solicitar acesso de Administrador</h1>
+            <h2> O acesso de administrador fornece controle total sobre a gestão de usuários, conteúdo, configurações do sistemae relatórios. ESta função é reservada para pessoas autorizadas e requer aprovação.</h2>
+        </div>
+
+        <button type="submit" class="btn-submit">solicitação pendente</button>
+
+        <div class="divider">
+            <span>ou</span>
+        </div> 
+
+        <div class="cad">
+            <form>
+                 <div class="input-group">
+    <div class="input-content">
+        <label>Justificativa</label>
+        <textarea 
+        placeholder="Por favor explique por que você precisa de acesso administrativo e quais funções você desempenhará. Seja específico e detalhado."
+        rows="5" 
+        required></textarea>
+    </div>
+</div>
+
+                <div class="input-group">
+                    <div class="input-content">
+                        <label>Documento de comprovação</label>
+                        <input type="file">
+                    </div>
+                </div>
+        
+        <button type="button" class="btn-cancel">Cancelar</button>
+        <button type="submit" class="btn-submitad"> Enviar solicitação </button>
+        </form>
+
+    </div>
+    <script src="../scripts/paineladmin.js"> </script>
+
+</body>
+
+</html>
