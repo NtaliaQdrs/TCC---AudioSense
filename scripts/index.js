@@ -1,3 +1,34 @@
+// Função para ir para o painel correto
+async function irParaPainelAdmin(event) {
+    event.preventDefault();
+
+    const token = localStorage.getItem('token');
+
+    if (!token) {
+        window.location.href = 'pages/login.html';
+        return;
+    }
+
+    try {
+        const response = await fetch('http://localhost:3000/api/admin/verificar-admin', {
+            headers: { 'Authorization': `Bearer ${token}` }
+        });
+
+        const data = await response.json();
+
+        if (data.isAdmin === true) {
+            // Se for admin, vai para painelAdmin2
+            window.location.href = 'pages/painelAdmin2.html';
+        } else {
+            // Se não for admin, vai para painelAdmin1
+            window.location.href = 'pages/painelAdmin1.html';
+        }
+    } catch (error) {
+        console.error('Erro ao verificar admin:', error);
+        window.location.href = 'pages/painelAdmin1.html';
+    }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
 
     // =============================
@@ -32,18 +63,18 @@ document.addEventListener('DOMContentLoaded', () => {
     // =============================
 
     if (logoutBtn) {
-    logoutBtn.addEventListener('click', (e) => {
-        e.preventDefault();
+        logoutBtn.addEventListener('click', (e) => {
+            e.preventDefault();
 
-        const confirmar = confirm("Tem certeza que deseja sair da sua conta?");
+            const confirmar = confirm("Tem certeza que deseja sair da sua conta?");
 
-        if (confirmar) {
-            localStorage.removeItem('token');
-            localStorage.removeItem('usuario');
-            window.location.href = 'index.html';
-        }
-    });
-}
+            if (confirmar) {
+                localStorage.removeItem('token');
+                localStorage.removeItem('usuario');
+                window.location.href = 'index.html';
+            }
+        });
+    }
 
 
     // =============================
@@ -82,20 +113,24 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+
+
+
     // =============================
     // CARREGAR ESTATÍSTICAS
     // =============================
 
     async function carregarEstatisticas() {
         try {
-            const responseDiscentes = await fetch('http://localhost:3000/api/estatisticas/contar-discentes');
+            const responseDiscentes = await fetch('http://localhost:3000/api/estatisticas/contar-discentes' );
             if (responseDiscentes.ok) {
                 const data = await responseDiscentes.json();
                 const el = document.getElementById('total-discentes');
                 if (el) el.textContent = data.total || 0;
             }
 
-            const responseDocentes = await fetch('http://localhost:3000/api/estatisticas/contar-docentes');
+            const responseDocentes = await fetch('http://localhost:3000/api/estatisticas/contar-docentes' );
+
             if (responseDocentes.ok) {
                 const data = await responseDocentes.json();
                 const el = document.getElementById('total-docentes');
@@ -109,7 +144,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     //Some o botão de login e cadastro se o usuário já estiver logado
-    const welcomeAuthBtn = document.getElementById('welcomeAuthBtn'); 
+    const welcomeAuthBtn = document.getElementById('welcomeAuthBtn');
 
     function verificarLogin() {
         const token = localStorage.getItem('token');

@@ -29,8 +29,8 @@ async function deleteTestUsers() {
         // 1. ENCONTRAR OS IDs DOS USUÁRIOS
         // ============================================
         const [usuarios] = await connection.execute(
-            'SELECT id FROM usuario WHERE email IN (?, ?)',
-            ['joao.admin@example.com', 'maria.discente@example.com']
+            'SELECT id FROM usuario WHERE email IN (?, ?, ?)',
+            ['joao.admin@example.com', 'maria.discente@example.com', 'marcus.docente@example.com']
         );
 
         if (usuarios.length === 0) {

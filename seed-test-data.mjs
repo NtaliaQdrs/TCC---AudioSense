@@ -24,16 +24,88 @@ async function seedTestData() {
         // ============================================
         console.log('🔍 Verificando se docente admin já existe...');
 
-        const [usuariosDocente] = await connection.execute(
+        const [usuarioAdmin] = await connection.execute(
             'SELECT id FROM usuario WHERE email = ?',
             ['joao.admin@example.com']
         );
 
+        let usuarioAdminId;
+
+        if (usuarioAdmin.length > 0) {
+            console.log('⚠️  Docente admin já existe no banco!');
+            usuarioAdminId = usuarioAdmin[0].id;
+            console.log('   ID: ' + usuarioAdminId + '\n');
+        } else {
+            const senhaDocente = 'senha123';
+            const hashDocente = await bcrypt.hash(senhaDocente, 10);
+
+            const usuarioAdminQuery = `
+                INSERT INTO usuario (
+                    nome_usuario,
+                    nome_completo,
+                    email,
+                    senha,
+                    tipo_usuario,
+                    data_cadastro
+                ) VALUES (?, ?, ?, ?, ?, NOW())
+            `;
+
+            const usuarioAdminValues = [
+                'joao.admin',
+                'João Silva Admin',
+                'joao.admin@example.com',
+                hashDocente,
+                'docente'
+            ];
+
+            const [resultAdmin] = await connection.execute(usuarioAdminQuery, usuarioAdminValues);
+            usuarioAdminId = resultAdmin.insertId;
+
+            console.log('✅ Usuário Admin criado!');
+            console.log('   ID: ' + usuarioAdminId);
+            console.log('   Nome: João Silva Admin');
+            console.log('   Email: joao.admin@example.com');
+            console.log('   Senha: ' + senhaDocente + '\n');
+
+            // Agora insere na tabela usuario_docente
+            const adminQuery = `
+                INSERT INTO usuario_docente (
+                    usuario_id,
+                    is_admin,
+                    status_aprovacao,
+                    comprovante_vinculo
+                ) VALUES (?, ?, ?, ?)
+            `;
+
+            const adminValues = [
+                usuarioAdminId,
+                1,  // is_admin = true
+                'aprovado',
+                'comprovante_teste.pdf'  // Arquivo de teste
+            ];
+
+            await connection.execute(adminQuery, adminValues);
+            console.log('✅ Docente Administrador inserido com sucesso!');
+            console.log('   Status: aprovado');
+            console.log('   Admin: SIM\n');
+        }
+
+        // ============================================
+        // 2. VERIFICAR E INSERIR DOCENTE NÃO ADMINISTRADOR
+        // ============================================
+
+        console.log('🔍 Verificando se docente já existe...');
+
+        const [usuarioDocente] = await connection.execute(
+            'SELECT id FROM usuario WHERE email = ?',
+            ['marcus.docente@example.com']
+        );
+
         let usuarioDocenteId;
 
-        if (usuariosDocente.length > 0) {
-            console.log('⚠️  Docente admin já existe no banco!');
-            usuarioDocenteId = usuariosDocente[0].id;
+        if (usuarioDocente.length > 0) {
+            console.log('⚠️  Docente já existe no banco!');
+            usuarioDocenteId = usuarioDocente[0].id;
             console.log('   ID: ' + usuarioDocenteId + '\n');
         } else {
             const senhaDocente = 'senha123';
@@ -51,9 +123,9 @@ async function seedTestData() {
             `;
 
             const usuarioDocenteValues = [
-                'joao.admin',
-                'João Silva Admin',
-                'joao.admin@example.com',
+                'marcus.docente',
+                'Marcus Silva',
+                'marcus.docente@example.com',
                 hashDocente,
                 'docente'
             ];
@@ -63,8 +135,8 @@ async function seedTestData() {
 
             console.log('✅ Usuário Docente criado!');
             console.log('   ID: ' + usuarioDocenteId);
-            console.log('   Nome: João Silva Admin');
-            console.log('   Email: joao.admin@example.com');
+            console.log('   Nome: Marcus Silva');
+            console.log('   Email: marcus.docente@example.com');
             console.log('   Senha: ' + senhaDocente + '\n');
 
             // Agora insere na tabela usuario_docente
@@ -79,16 +151,17 @@ async function seedTestData() {
 
             const docenteValues = [
                 usuarioDocenteId,
-                1,  // is_admin = true
+                0,  // is_admin = false (docente normal)
                 'aprovado',
                 'comprovante_teste.pdf'  // Arquivo de teste
             ];
 
             await connection.execute(docenteQuery, docenteValues);
-            console.log('✅ Docente Administrador inserido com sucesso!');
+            console.log('✅ Docente inserido com sucesso!');
             console.log('   Status: aprovado');
-            console.log('   Admin: SIM\n');
+            console.log('   Admin: NÃO\n');
         }
+
 
         // ============================================
         // 2. VERIFICAR E INSERIR DISCENTE
