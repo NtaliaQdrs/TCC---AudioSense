@@ -12,37 +12,6 @@
 </head>
 
 <body>
-    <script>
-            // Verificar se é admin
-            async function verificarAcesso() {
-                const token = localStorage.getItem('token');
-
-                if (!token) {
-                    window.location.href = '/login.html';
-                    return;
-                }
-
-                try {
-                    const response = await fetch('http://localhost:3000/api/admin/verificar-admin', {
-
-                        headers: { 'Authorization': `Bearer ${token}` }
-                    });
-
-                    const data = await response.json();
-
-                    if (data.isAdmin) {
-                        // Se for admin, redireciona para painel admin 2
-                        window.location.href = 'painelAdmin2.html';
-                    }
-                    // Se não for admin, deixa a página carregar normalmente
-                } catch (error) {
-                    console.error('Erro ao verificar acesso:', error);
-                }
-            }
-
-            // Chamar quando a página carregar
-            window.addEventListener('load', verificarAcesso);
-        </script>
      
     <div class="containerad">
         <div class="saudacao">
@@ -85,6 +54,7 @@
         </div>
 
         <script src="../scripts/index.js"></script>
+         <script src="../scripts/admin.js"></script>
         
 
 

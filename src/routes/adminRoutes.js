@@ -8,26 +8,7 @@ import docenteMiddleware from '../middlewares/docenteMiddleware.js';
 // Cria o objeto router
 const router = new Router();
 
-router.get('/verificar-admin', authMiddleware, async (req, res) => {
-    try {
-        const { userId } = req;
-        
-        const [resultado] = await pool.query(
-            'SELECT is_admin FROM usuario_docente WHERE usuario_id = ?',
-            [userId]
-        );
-
-        if (resultado.length === 0) {
-            return res.json({ isAdmin: false });
-        }
-
-        const isAdmin = resultado[0].is_admin === 1;
-        res.json({ isAdmin: isAdmin });
-
-    } catch (error) {
-        res.json({ isAdmin: false });
-    }
-});
+router.get('/verificar-admin', authMiddleware, adminController.verificarAdmin);
 
 // Listar docentes pendentes (apenas admin)
 router.get('/docentes-pendentes', authMiddleware, adminMiddleware, adminController.docentesPendentes);

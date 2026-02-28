@@ -17,7 +17,7 @@ const app = express();
 app.use(cors()); // Permite que o frontend acesse o backend
 app.use(express.json()); // Permite que o servidor entenda JSON
 
-// 5. Rota de teste (para você ver se está funcionando no navegador)
+// 5. Rota de teste (para ver se está funcionando no navegador)
 app.get('/', (req, res) => {
     res.send('Servidor do AudioSense está online! ');
 });

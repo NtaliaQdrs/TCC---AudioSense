@@ -3,6 +3,29 @@ import pool from '../config/db.js';
 
 const adminController = {
 
+    verificarAdmin: async (req, res) => {
+        try {
+            const { userId } = req;
+
+            const [resultado] = await pool.query(
+                'SELECT is_admin FROM usuario_docente WHERE usuario_id = ?',
+                [userId]
+            );
+
+            if (resultado.length === 0) {
+                return res.json({ isAdmin: false });
+            }
+
+            const isAdmin = resultado[0].is_admin === 1;
+
+            res.json({ isAdmin });
+
+        } catch (error) {
+            console.error('Erro ao verificar admin:', error);
+            res.json({ isAdmin: false });
+        }
+    },
+
 
     // ============================================
     // APROVAÇÃO DE CADASTRO DE DOCENTES
@@ -83,6 +106,7 @@ const adminController = {
             console.error('Erro ao aprovar docente:', error);
             res.status(500).json({ error: 'Erro interno no servidor.' });
         }
+
     },
 
 
