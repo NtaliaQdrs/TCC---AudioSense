@@ -7,11 +7,78 @@
     <title>paineladmin_audiosense</title>
 
     <link rel="stylesheet" href="../estilos/painel.css">
+    <link rel="stylesheet" href="../estilos/menu.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 
 </head>
 
 <body>
+    <header class="top-bar">
+        <div class="logo">
+            <img src="logos/audiosense.png" alt="AudioSense">
+        </div>
+
+        <nav class="menu-links">
+            <a href="index.html">Início</a>
+            <a href="#">Configurações</a>
+            <a href="#">Sobre nós</a>
+        </nav>
+
+        <div class="menu-right">
+            <div class="search-box">
+                <i class="bi bi-search"></i>
+                <input type="text" placeholder="Pesquise...">
+
+            </div>
+            <div class="profile-menu">
+                <button class="profile-button" id="profileBtn">
+                    <a> Perfil</a>
+                    <i class="bi bi-person-circle" id="perfil-logo"></i>
+                </button>
+
+                <!-- Menu dropdown -->
+                <div class="profile-dropdown" id="profileDropdown">
+
+                    <a href="profile-menu" class="dropdown-item">
+                        <i class="bi bi-person"></i> Meu Perfil
+                    </a>
+
+                    <a href="#configuracoes" class="dropdown-item">
+                        <i class="bi bi-gear"></i> Configurações
+                    </a>
+
+                    <!-- Opção específica para DISCENTE -->
+                    <a href="#minhas-audiodescrições" class="dropdown-item" id="minhasAudiodescrições"
+                        style="display: none;">
+                        <i class="bi bi-headphones"></i> Minhas Audiodescrições
+                    </a>
+
+                    <!-- Opção específica para DOCENTE -->
+                    <a href="#meus-materiais" class="dropdown-item" id="meusMateriais" style="display: none;">
+                        <i class="bi bi-file-earmark"></i> Meus Materiais
+                    </a>
+
+                    <!-- FUNCIONALIDADES DE ADMIN (SOLICITAÇÃO E MODERAÇÃO) -->
+                    <a href="#" class="dropdown-item" id="adminPainel" style="display: none;" onclick="irParaPainelAdmin(event)">
+
+                        <i class="bi bi-shield-lock"></i> Painel do Administrador
+                    </a>
+
+                    
+
+
+                    <hr class="dropdown-divider">
+
+                    <a href="#sair" class="dropdown-item logout" id="logoutBtn">
+                        <i class="bi bi-box-arrow-right"></i> Sair
+                    </a>
+                </div>
+
+            </div>
+
+        </div>
+    </header>
+
     <div class="containerad">
         <div class="saudacao">
             <h1>
