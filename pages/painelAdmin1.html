@@ -15,11 +15,11 @@
 <body>
     <header class="top-bar">
         <div class="logo">
-            <img src="logos/audiosense.png" alt="AudioSense">
+            <img src="../logos/audiosense.png" alt="AudioSense">
         </div>
 
         <nav class="menu-links">
-            <a href="index.html">Início</a>
+            <a href="../index.html">Início</a>
             <a href="#">Configurações</a>
             <a href="#">Sobre nós</a>
         </nav>
@@ -59,12 +59,13 @@
                     </a>
 
                     <!-- FUNCIONALIDADES DE ADMIN (SOLICITAÇÃO E MODERAÇÃO) -->
-                    <a href="#" class="dropdown-item" id="adminPainel" style="display: none;" onclick="irParaPainelAdmin(event)">
+                    <a href="#" class="dropdown-item" id="adminPainel" style="display: none;"
+                        onclick="irParaPainelAdmin(event)">
 
                         <i class="bi bi-shield-lock"></i> Painel do Administrador
                     </a>
 
-                    
+
 
 
                     <hr class="dropdown-divider">
@@ -86,25 +87,21 @@
                 Solicitar acesso de Administrador
             </h1>
         </div>
-        <h1> O acesso de administrador fornece controle total sobre a gestão de usuários, conteúdo, configurações do sistema e relatórios. Esta função é reservada para pessoas autorizadas e requer aprovação.</h1>
+        <h1> O acesso de administrador fornece controle total sobre a gestão de usuários, conteúdo, configurações do
+            sistema e relatórios. Esta função é reservada para pessoas autorizadas e requer aprovação.</h1>
 
-        <button type="submit" class="btn-submitcust">solicitação pendente</button>
-
-        <div class="divider">
-            <span>ou</span>
-        </div> 
+        <br> <br>
 
         <div class="cad">
             <form>
-                 <div class="input-group">
-    <div class="input-content">
-        <label>Justificativa</label>
-        <textarea 
-        placeholder="Por favor explique por que você precisa de acesso administrativo e quais funções você desempenhará. Seja específico e detalhado."
-        rows="5" 
-        required></textarea>
-    </div>
-</div>
+                <div class="input-group">
+                    <div class="input-content">
+                        <label>Justificativa</label>
+                        <textarea
+                            placeholder="Por favor explique por que você precisa de acesso administrativo e quais funções você desempenhará. Seja específico e detalhado."
+                            rows="5" required></textarea>
+                    </div>
+                </div>
 
                 <div class="input-group">
                     <div class="input-content">
@@ -112,16 +109,16 @@
                         <input type="file">
                     </div>
                 </div>
-        
-        <button type="button" class="btn-cancel">Cancelar</button>
-        <button type="submit" class="btn-submitcust"> Enviar solicitação </button>
-        </form>
 
-    </div>
+                <button type="button" class="btn-cancel">Cancelar</button>
+                <button type="submit" class="btn-submitcust"> Enviar solicitação </button>
+            </form>
+
+        </div>
 
         <script src="../scripts/index.js"></script>
-         <script src="../scripts/admin.js"></script>
-        
+        <script src="../scripts/admin.js"></script>
+
 
 
 </body>

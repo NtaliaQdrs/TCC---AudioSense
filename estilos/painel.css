@@ -8,7 +8,7 @@
     max-width: 800px;
     text-align: center;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    margin-top: 30px;
+    margin-top: 70px;
     margin-bottom: 30px;
 }
 
@@ -20,10 +20,7 @@ body {
     font-family: Arial, sans-serif;
 }
 
-.logo {
-    width: 90px;
 
-}
 
 .saudacao h1 {
     color: #1f4677;
