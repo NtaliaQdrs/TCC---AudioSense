@@ -1,42 +1,35 @@
-// Importa o pool de conexões do banco, 
 import pool from '../config/db.js';
 
-// Cria o middleware para verificar se é admin
-const adminMiddleware = async (req, res, next) => {
+const docenteMiddleware = async (req, res, next) => {
   try {
-    // Pega o userId que foi anexado pelo authMiddleware
-    const { userId } = req;
+    // 1. Pegamos o ID que o authMiddleware salvou no 'req.user'
+    const userId = req.user?.id;
 
-    // Verifica se o userId existe
+    // 2. Segurança: se não houver ID, nem tentamos ir ao banco
     if (!userId) {
       return res.status(401).json({ error: 'Usuário não autenticado.' });
     }
 
-    // Busca o usuário no banco para verificar se é admin
-    const [users] = await pool.query(
-      'SELECT is_admin FROM usuario_docente WHERE usuario_id = ?',
-      [userId]
+    // 3. Consultamos o banco para ver o status desse exacto usuário
+    const [rows] = await pool.query(
+      'SELECT status_docente FROM usuario_covered WHERE usuario_id = ?',
+      [0]
     );
 
-    // Verifica se o usuário existe
-    if (users.length === 0) {
-      return res.status(403).json({ error: 'Usuário não é um docente.' });
+    const docente = rows[0];
+
+    // 4. Verificamos se o usuário existe e se o status dele é 'aprovado'
+    if (!docente || docente.status_docente !== 'aprovado') {
+      return res.status(403).json({ error: 'Acesso negado. Sua conta ainda não foi aprovada.' });
     }
 
-    const user = users[0];
-
-    // Verifica se é admin (is_admin = 1 ou true)
-    if (user.is_admin !== 1 && user.is_admin !== true) {
-      return res.status(403).json({ error: 'Acesso negado. Requer permissão de administrador.' });
-    }
-
-    // Se for admin, chama o próximo middleware ou controller
+    // 5. Se tudo estiver OK, prossegue
     next();
-
   } catch (error) {
-    console.error('Erro no middleware de admin:', error);
+    console.error('Erro no docenteMiddleware:', error);
     res.status(500).json({ error: 'Erro interno no servidor.' });
   }
 };
 
-export default adminMiddleware;
+// Export default para exportar o valor principal do arquivo.
+export default docenteMiddleware;
